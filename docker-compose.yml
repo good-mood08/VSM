@@ -1,0 +1,31 @@
+services:
+  cms:
+    container_name: strapi_cms
+    build:
+      context: .
+      dockerfile: Dockerfile.cms
+    restart: unless-stopped
+    env_file:
+      - ./apps/cms/.env
+    ports:
+      - "1337:1337"
+    volumes:
+      - cms-uploads:/app/apps/cms/public/uploads
+      - cms-database:/app/apps/cms/.tmp
+
+  web:
+    container_name: nextjs_web
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+    restart: unless-stopped
+    depends_on:
+      - cms
+    env_file:
+      - ./apps/web/.env
+    ports:
+      - "3000:3000"
+
+volumes:
+  cms-uploads:
+  cms-database:

@@ -1,0 +1,8 @@
+node_modules/
+apps/cms/node_modules/
+apps/web/node_modules/
+packages/*/node_modules/
+.git/
+apps/cms/.tmp/
+apps/cms/build/
+apps/web/.next/

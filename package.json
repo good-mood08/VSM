@@ -25,5 +25,13 @@
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  },
+  "overrides": {
+    "@types/react": "18.3.31",
+    "@types/react-dom": "18.3.0"
+  }
+
 }
