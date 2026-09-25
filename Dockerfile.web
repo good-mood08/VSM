@@ -1,18 +1,30 @@
-FROM node:22-alpine
+FROM node:22-alpine AS base
 
+RUN npm install -g npm@10.9.3
 WORKDIR /app
 
+FROM base AS prepare
+
 COPY . .
-RUN npm install -g npm@10.9.3
+RUN npm i -g turbo@2
+RUN turbo prune web --docker
 
-RUN rm -f package-lock.json
 
-RUN npm i
-    
-RUN npx turbo run build --filter=web
+FROM base AS builder
+COPY --from=prepare /app/out/json/ .
+RUN npm ci
+RUN npm install @typescript/typescript-linux-x64
+COPY --from=prepare /app/out/full/ .
+RUN npx turbo build
 
-WORKDIR /app/apps/web
 
-EXPOSE 3000
+FROM base AS runner
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+USER nextjs
 
-CMD ["npm", "run", "start"]
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./apps/web/.next/static
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/public ./apps/web/public
+
+CMD node apps/web/server.js
