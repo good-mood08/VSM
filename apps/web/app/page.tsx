@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from 'next/image'
-import Scenario from "./components/Scenario";
+import Scenario from "./components/Home/Scenario";
 
 type TRole = "Администратор" | "Экзаменатор" | "Проводник"
 
