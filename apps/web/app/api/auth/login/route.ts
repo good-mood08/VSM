@@ -5,12 +5,15 @@ export async function POST(request: Request) {
     const body = await request.json();
     const { login, password } = body;
 
-    const strapiRes = await fetch('http://localhost:1337/api/auth/local', {
+    const strapiRes = await fetch('http://127.0.0.1:1337/api/auth/local', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ login, password }),
+      body: JSON.stringify({
+        identifier: login,
+        password,
+      }),
     });
 
     const data = await strapiRes.json();
@@ -27,15 +30,14 @@ export async function POST(request: Request) {
     response.cookies.set({
       name: 'jwt',
       value: data.jwt,
-      httpOnly: true, 
-      secure: process.env.NODE_ENV === 'production', 
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       path: '/',
-      maxAge: 60 * 60 * 24 * 7, 
+      maxAge: 60 * 60 * 24 * 7,
     });
 
     return response;
-    
   } catch (error) {
     return NextResponse.json(
       { error: 'Внутренняя ошибка сервера' },

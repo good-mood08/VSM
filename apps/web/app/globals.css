@@ -1,9 +1,15 @@
 @import "tailwindcss";
 
 @theme {
+
+  --color-accent: #ee3524;
+  --color-main: #000000;
+  --color-addition: #727272;
+  --color-border: #cbcbcb;
+  --color-page: #ffffff;
+
   --color-accent-1: #EE3524;
   --color-accent-2: #FFC800;
-  --color-main: #000000;
   --color-gray-1: #727272;
   --color-gray-2: #CBCBCB;
   --color-gray-3: #F5F5F5;
@@ -11,40 +17,64 @@
 
   --font-ru-rail: var(--font-rurail), sans-serif;
   --font-inter: var(--font-inter), sans-serif;
-}
-/* 
-h1{
-  font-size: 70px;
-  font-weight: 700;
-  line-height: 92px;
+  --font-rail: var(--font-rurail), sans-serif;
 }
 
-h2{
-  font-size: 48px;
-  font-weight: 700;
-  line-height: 64px;
+@layer base {
+  html {
+    font-family: var(--font-inter);
+    background-color: var(--color-page);
+    color: var(--color-main);
+  }
+
+  body {
+    font-family: var(--font-inter), sans-serif;
+    background: var(--color-page);
+    color: var(--color-main);
+  }
 }
 
-h3{
-  font-size: 28px;
-  font-weight: 600;
-  line-height: 48px;
+@layer utilities {
+  .text-h1 {
+    font-size: 4.375rem;
+    line-height: 5.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .text-h2 {
+    font-size: 3rem;
+    line-height: 4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .text-h3 {
+    font-size: 1.75rem;
+    line-height: 3rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .text-h4 {
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .text-h5 {
+    font-size: 1.25rem;
+    line-height: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .text-h6 {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    font-weight: 500;
+  }
+
 }
 
-h4{
-  font-size: 24px;
-  font-weight: 700;
-  line-height: 40px;
-}
-
-h5{
-  font-size: 20px;
-  font-weight: 600;
-  line-height: 32px;
-}
-
-h6{
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 28px;
-} */

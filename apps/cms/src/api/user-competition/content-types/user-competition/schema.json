@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_competitions",
+  "info": {
+    "singularName": "user-competition",
+    "pluralName": "user-competitions",
+    "displayName": "user competition"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "competitions": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::competition.competition",
+      "mappedBy": "user_competition"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "user_competitions"
+    }
+  }
+}

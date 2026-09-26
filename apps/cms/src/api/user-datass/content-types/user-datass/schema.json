@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_datasses",
+  "info": {
+    "singularName": "user-datass",
+    "pluralName": "user-datasses",
+    "displayName": "user datass",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "rating": {
+      "type": "decimal"
+    },
+    "scenario": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::scenario.scenario",
+      "inversedBy": "user_datasses"
+    },
+    "achievements": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::achievement.achievement",
+      "mappedBy": "user_datass"
+    },
+    "date": {
+      "type": "date"
+    }
+  }
+}
