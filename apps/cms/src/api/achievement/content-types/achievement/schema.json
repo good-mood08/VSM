@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "achievements",
+  "info": {
+    "singularName": "achievement",
+    "pluralName": "achievements",
+    "displayName": "achievement"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "user_achivments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::user-achivment.user-achivment",
+      "mappedBy": "achievement"
+    },
+    "user_datass": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::user-datass.user-datass",
+      "inversedBy": "achievements"
+    }
+  }
+}
