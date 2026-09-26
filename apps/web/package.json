@@ -14,6 +14,7 @@
     "@repo/ui": "*",
     "@tailwindcss/postcss": "^4.3.3",
     "axios": "^1.20.0",
+    "https-proxy-agent": "^5.0.1",
     "next": "16.3.4",
     "postcss": "^8.5.28",
     "react": "19.2.8",
