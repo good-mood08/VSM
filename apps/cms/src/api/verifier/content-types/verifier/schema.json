@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "verifiers",
+  "info": {
+    "singularName": "verifier",
+    "pluralName": "verifiers",
+    "displayName": "verifier"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "achievement": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::achievement.achievement",
+      "inversedBy": "verifier"
+    }
+  }
+}

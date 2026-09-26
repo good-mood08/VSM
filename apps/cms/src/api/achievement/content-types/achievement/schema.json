@@ -27,6 +27,12 @@
       "relation": "manyToOne",
       "target": "api::user-datass.user-datass",
       "inversedBy": "achievements"
+    },
+    "verifier": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::verifier.verifier",
+      "mappedBy": "achievement"
     }
   }
 }

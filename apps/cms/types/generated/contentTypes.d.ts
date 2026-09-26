@@ -403,6 +403,7 @@ export interface ApiAchievementAchievement extends Struct.CollectionTypeSchema {
       'manyToOne',
       'api::user-datass.user-datass'
     >;
+    verifier: Schema.Attribute.Relation<'oneToOne', 'api::verifier.verifier'>;
   };
 }
 
@@ -476,6 +477,10 @@ export interface ApiScenarioScenario extends Struct.CollectionTypeSchema {
     user_datasses: Schema.Attribute.Relation<
       'oneToMany',
       'api::user-datass.user-datass'
+    >;
+    user_scenarios: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::user-scenario.user-scenario'
     >;
   };
 }
@@ -582,6 +587,70 @@ export interface ApiUserDatassUserDatass extends Struct.CollectionTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     rating: Schema.Attribute.Decimal;
     scenario: Schema.Attribute.Relation<'manyToOne', 'api::scenario.scenario'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiUserScenarioUserScenario
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'user_scenarios';
+  info: {
+    displayName: 'user-scenario';
+    pluralName: 'user-scenarios';
+    singularName: 'user-scenario';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::user-scenario.user-scenario'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    scenario: Schema.Attribute.Relation<'manyToOne', 'api::scenario.scenario'>;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    users_permissions_user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
+export interface ApiVerifierVerifier extends Struct.CollectionTypeSchema {
+  collectionName: 'verifiers';
+  info: {
+    displayName: 'verifier';
+    pluralName: 'verifiers';
+    singularName: 'verifier';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    achievement: Schema.Attribute.Relation<
+      'oneToOne',
+      'api::achievement.achievement'
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::verifier.verifier'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1086,6 +1155,10 @@ export interface PluginUsersPermissionsUser
       'oneToMany',
       'api::user-competition.user-competition'
     >;
+    user_scenarios: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::user-scenario.user-scenario'
+    >;
     username: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique &
@@ -1111,6 +1184,8 @@ declare module '@strapi/strapi' {
       'api::user-achivment.user-achivment': ApiUserAchivmentUserAchivment;
       'api::user-competition.user-competition': ApiUserCompetitionUserCompetition;
       'api::user-datass.user-datass': ApiUserDatassUserDatass;
+      'api::user-scenario.user-scenario': ApiUserScenarioUserScenario;
+      'api::verifier.verifier': ApiVerifierVerifier;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;
