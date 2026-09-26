@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Inter } from "next/font/google";
+import NavPanel from "./components/NavPanel";
 
 const russianRailG = localFont({
   src: './fonts/RussianRail G Pro Regular_0.otf',
@@ -15,14 +16,10 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: "Сверхпровод",
-  description: "Создано командой PRO MTT",
+  description: "Создано командой PROfessionals",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({children}: Readonly<{children: React.ReactNode}>) {
   return (
     <html lang="ru" >
       <body className={`${inter.variable} ${russianRailG.variable}`}>

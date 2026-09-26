@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from 'next/image'
-import Scenario from "./components/Scenario";
+import Scenario from "./components/Home/Scenario";
 
 type TRole = "Администратор" | "Экзаменатор" | "Проводник"
 
@@ -20,6 +20,7 @@ export default function Home(){
     <div className="py-20.5 px-7 flex flex-col gap-10">
       <div className="flex flex-row justify-between">
         <h1 className="text-accent text-[26px] font-ru-rail">Добрый день,<br/> {name}!</h1>
+        
         {!newMessages ? (
           <Image 
             src='/svg/empty-notification.svg'
