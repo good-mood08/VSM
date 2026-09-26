@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_scenarios",
+  "info": {
+    "singularName": "user-scenario",
+    "pluralName": "user-scenarios",
+    "displayName": "user-scenario"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "user_scenarios"
+    },
+    "scenario": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::scenario.scenario",
+      "inversedBy": "user_scenarios"
+    }
+  }
+}

@@ -86,6 +86,12 @@
       ],
       "type": "media",
       "multiple": false
+    },
+    "user_scenarios": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::user-scenario.user-scenario",
+      "mappedBy": "users_permissions_user"
     }
   }
 }
