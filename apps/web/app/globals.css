@@ -1,11 +1,19 @@
 @import "tailwindcss";
 
 @theme {
+
   --color-accent: #ee3524;
   --color-main: #000000;
   --color-addition: #727272;
   --color-border: #cbcbcb;
   --color-page: #ffffff;
+
+  --color-accent-1: #EE3524;
+  --color-accent-2: #FFC800;
+  --color-gray-1: #727272;
+  --color-gray-2: #CBCBCB;
+  --color-gray-3: #F5F5F5;
+
 
   --font-ru-rail: var(--font-rurail), sans-serif;
   --font-inter: var(--font-inter), sans-serif;
@@ -69,3 +77,4 @@
   }
 
 }
+
