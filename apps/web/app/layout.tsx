@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Inter } from "next/font/google";
-import NavPanel from "./components/NavPanel";
+import { HistoryProvider } from "./context/HistoryProvider";
 
 const russianRailG = localFont({
   src: './fonts/RussianRail G Pro Regular_0.otf',
@@ -23,7 +23,9 @@ export default function RootLayout({children}: Readonly<{children: React.ReactNo
   return (
     <html lang="ru" >
       <body className={`${inter.variable} ${russianRailG.variable}`}>
-        {children}
+        <HistoryProvider>
+          {children}
+        </HistoryProvider>
       </body>
     </html>
   );
