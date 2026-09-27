@@ -32,9 +32,9 @@ export default function ExamCard({ title, description, time, role, imageSrc }: E
             </div>
           </div>
         </div>
-        <Button variant="filled" href="/scenario/exam" className="w-full">
+        {/* <Button variant="filled" href="/scenario/exam" className="w-full">
           Экзамен
-        </Button>
+        </Button> */}
       </div>
     </article>
   )

@@ -1,159 +1,164 @@
-# Turborepo starter
+# Как развернуть проект локально
 
-This Turborepo starter is maintained by the Turborepo core team.
+## 1) Установка зависимостей
 
-## Using this example
+В корне проекта:
 
-Run the following command:
-
-```sh
-npx create-turbo@latest
+```bash
+npm i
 ```
 
-## What's inside?
+## 2) Strapi CMS
 
-This Turborepo includes the following packages/apps:
+Переходим в папку CMS:
 
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `@next/eslint-plugin-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo build
+```bash
+cd apps/cms
 ```
 
-Without global `turbo`, use your package manager:
+Создаём файл `.env` на основе примера:
 
-```sh
-cd my-turborepo
-npx turbo build
-npm exec turbo build
-npm exec turbo build
+```bash
+copy .env.example .env
 ```
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+Дальше собираем и запускаем Strapi:
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+```bash
+npm run build
 
-```sh
-turbo build --filter=docs
+npx strapi import --file ./data_base.tar.gz.enc --force
+
 ```
 
-Without global `turbo`:
 
-```sh
-npx turbo build --filter=docs
-npm exec turbo build --filter=docs
-npm exec turbo build --filter=docs
+
+
+После этого CMS будет доступен по адресу:
+
+- http://localhost:1337/admin
+
+## 3) Frontend
+
+В другом терминале:
+
+```bash
+cd apps/web
+npm run dev
 ```
 
-### Develop
+Frontend будет доступен по адресу:
 
-To develop all apps and packages, run the following command:
+- http://localhost:3000
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+---
 
-```sh
-cd my-turborepo
-turbo dev
+# Как развернуть через Docker
+
+Важно: перед сборкой контейнеров сначала нужно подготовить и импортировать базу данных, чтобы она попала в Docker-образ/контекст. Иначе контейнер запустится пустым.
+
+## 1) Подготовить переменные окружения
+
+В папке `apps/cms` создайте `.env` из `.env.example`:
+
+```bash
+cd apps/cms
+copy .env.example .env
 ```
 
-Without global `turbo`, use your package manager:
+Также создайте файл `apps/web/.env` для Docker:
 
-```sh
-cd my-turborepo
-npx turbo dev
-npm exec turbo dev
-npm exec turbo dev
+```bash
+cd apps/web
+copy NUL .env
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+Внутри `.env` можно оставить примерно так:
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo dev --filter=web
+```env
+STRAPI_API_URL=http://cms:1337
+NODE_ENV=production
 ```
 
-Without global `turbo`:
+## 2) Подготовить дамп базы
 
-```sh
-npx turbo dev --filter=web
-npm exec turbo dev --filter=web
-npm exec turbo dev --filter=web
+Если у вас уже есть готовый экспорт базы, положите его в папку `apps/cms`, например:
+
+```bash
+apps/cms/export_20260927035427.tar.gz.enc
 ```
 
-### Remote Caching
+Если дампа ещё нет — сначала запускаем локальный Strapi и делаем экспорт:
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo login
+```bash
+cd apps/cms
+npm run develop
 ```
 
-Without global `turbo`, use your package manager:
+В другом окне:
 
-```sh
-cd my-turborepo
-npx turbo login
-npm exec turbo login
-npm exec turbo login
+```bash
+cd apps/cms
+npx strapi export --no-encrypt --file ./data_base
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+После этого файл `data_base.tar.gz` уже находится в проекте и его можно использовать в Docker.
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
+## 3) Собрать и запустить Docker
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+Из корня проекта:
 
-```sh
-turbo link
+```bash
+docker compose build
+docker compose up -d
 ```
 
-Without global `turbo`:
+Если в `apps/cms` есть файл `data_base.tar.gz` (или `data_base.tar.gz.enc` для старого варианта), то контейнер при старте сам импортирует его в Strapi перед запуском приложения.
 
-```sh
-npx turbo link
-npm exec turbo link
-npm exec turbo link
+Типичный сценарий:
+
+```bash
+cd apps/cms
+npx strapi export --no-encrypt --file ./data_base
+cd ../..
+docker compose up --build -d
 ```
 
-## Useful Links
+После этого:
 
-Learn more about the power of Turborepo:
+- CMS: http://localhost:1337
+- Web: http://localhost:3000
 
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+> Ключевая идея: сначала делаем экспорт базы и кладём её рядом с проектом / в контекст сборки Docker, потом запускаем сборку. Только так база реально попадёт в контейнер и не будет пустой после старта.
+
+---
+
+# Быстрый сценарий
+
+Локально:
+
+```bash
+npm i
+cd apps/cms
+copy .env.example .env
+npm run build
+npx strapi import --file ./data_base.tar.gz --force
+npm run develop
+```
+
+В другом терминале:
+
+```bash
+cd apps/web
+npm run dev
+```
+
+Через Docker:
+
+```bash
+cd apps/cms
+copy .env.example .env
+npx strapi export --no-encrypt --file ./data_base
+cd ../..
+docker compose up --build -d
+```

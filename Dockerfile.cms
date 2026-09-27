@@ -8,8 +8,10 @@ COPY . .
 RUN npm install -g npm@10.9.3
 
 RUN npm i
-
 RUN npx turbo run build --filter=cms
+
+RUN mkdir -p /app/apps/cms/.tmp
+COPY apps/cms/.tmp/data.db /app/apps/cms/.tmp/data.db
 
 WORKDIR /app/apps/cms
 
