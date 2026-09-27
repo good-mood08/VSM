@@ -1,43 +1,17 @@
 import Image from 'next/image'
+import type { ScenarioCard } from '@/api/scenarios/scenario'
 import Bullet from '@/components/Home/Bullet'
 import Backarrow from '@/components/ui/Back_arrow'
 import Button from '@/components/ui/Button'
+import Divider from '@/components/ui/Divider'
 
-type ScenarioListItem = {
-  id: string
-  title: string
-  description: string
-  situation: string
-  difficulty: string
+type ScenarioListProps = {
+  scenarios: ScenarioCard[]
 }
 
-const scenarios: ScenarioListItem[] = [
-  {
-    id: 'one-shift',
-    title: '“Одна смена”',
-    description: 'Несколько сложных ситуаций за один рейс',
-    situation: 'Многозадачность',
-    difficulty: 'Сложная',
-  },
-  {
-    id: 'neighbor-seats',
-    title: '“Соседние кресла”',
-    description: 'Два пассажира спорят, каждый требует поддержки. Ситуация выходит из-под контроля.',
-    situation: 'Конфликт',
-    difficulty: 'Сложная',
-  },
-  {
-    id: 'full-car',
-    title: '“Полный вагон”',
-    description: 'В вагоне мало места. Конфликт и медицинская ситуация требуют действий.',
-    situation: 'Давка',
-    difficulty: 'Средняя',
-  },
-]
-
-export default function ScenarioList() {
+export default function ScenarioList({ scenarios }: ScenarioListProps) {
   return (
-    <div className="mx-auto flex w-[min(346px,calc(100%-32px))] min-w-0 flex-col">
+    <div className="mx-auto flex w-content min-w-0 flex-col">
       <header className="relative flex h-[42px] items-center">
         <Backarrow />
         <h1 className="absolute left-1/2 -translate-x-1/2 text-[15px] leading-[normal] font-semibold whitespace-nowrap text-black">
@@ -53,30 +27,26 @@ export default function ScenarioList() {
           >
             <div className="relative h-[178px] w-full overflow-hidden">
               <Image
-                src="/png/scenario/super.png"
-                width={314}
-                height={178}
+                src={scenario.imageUrl ?? '/png/scenario/super.png'}
                 alt=""
-                className="absolute top-[-9.24%] left-[0.06%] h-[113.45%] w-[99.93%] max-w-none"
+                fill
+                sizes="346px"
+                className="object-cover"
               />
             </div>
-            <div className="h-px w-full bg-black" />
+            <Divider />
             <div className="flex w-full flex-col gap-6">
               <div className="flex flex-col gap-[18px]">
                 <div className="flex flex-col gap-1.5">
-                  <h2 className="text-[15px] leading-[normal] font-semibold text-black">{scenario.title}</h2>
+                  <h2 className="text-[15px] leading-[normal] font-semibold text-black">{scenario.name}</h2>
                   <p className="text-[13px] leading-[normal] font-normal text-[#727272]">{scenario.description}</p>
                 </div>
-                <div className="flex flex-wrap gap-x-8 gap-y-3">
-                  <div className="flex flex-col gap-2">
-                    <p className="text-[13px] leading-[normal] font-medium whitespace-nowrap text-black">Ситуации:</p>
-                    <Bullet>{scenario.situation}</Bullet>
-                  </div>
+                {scenario.difficulty ? (
                   <div className="flex flex-col gap-2">
                     <p className="text-[13px] leading-[normal] font-medium whitespace-nowrap text-black">Сложность:</p>
                     <Bullet>{scenario.difficulty}</Bullet>
                   </div>
-                </div>
+                ) : null}
               </div>
               <div className="flex items-start gap-2.5">
                 <Button variant="filled" href="/scenario/exam" className="min-w-0 flex-1">

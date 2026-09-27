@@ -8,6 +8,7 @@
   --color-border: #CBCBCB;
   --color-gray-3: #F5F5F5;
   --color-page: #FFFFFF;
+  --width-content: min(346px, calc(100% - 32px));
 
   --text-h1: 70px;
   --text-h1--line-height: 92px;

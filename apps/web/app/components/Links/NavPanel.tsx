@@ -36,7 +36,7 @@ export default function NavPanel(){
     const currentPage = usePathname()
 
     return (
-        <div className="fixed bottom-10 left-1/2 z-10 flex w-[min(346px,calc(100%-32px))] -translate-x-1/2 flex-row justify-between rounded-[90px] bg-white">
+        <div className="fixed bottom-10 left-1/2 z-10 flex w-content -translate-x-1/2 flex-row justify-between rounded-[90px] bg-white">
             {links.map((link, index) => (
                 <NavigationLink 
                     href={link.href}

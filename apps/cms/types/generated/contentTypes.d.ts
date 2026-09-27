@@ -625,6 +625,7 @@ export interface ApiScenarioScenario extends Struct.CollectionTypeSchema {
 export interface ApiSituationSituation extends Struct.CollectionTypeSchema {
   collectionName: 'situations';
   info: {
+    description: '';
     displayName: 'Situation';
     pluralName: 'situations';
     singularName: 'situation';
@@ -633,6 +634,7 @@ export interface ApiSituationSituation extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    act: Schema.Attribute.String;
     Choice: Schema.Attribute.Component<'shared.choice', true>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -648,6 +650,7 @@ export interface ApiSituationSituation extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    time: Schema.Attribute.Component<'shared.choice', false>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;

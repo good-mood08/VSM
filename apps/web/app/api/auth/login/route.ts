@@ -1,11 +1,12 @@
 import { NextResponse } from 'next/server';
+import { strapiUrl } from '../../strapi';
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
     const { login, password } = body;
 
-    const strapiRes = await fetch('http://127.0.0.1:1337/api/auth/local', {
+    const strapiRes = await fetch(strapiUrl('/api/auth/local'), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

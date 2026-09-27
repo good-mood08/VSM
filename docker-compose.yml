@@ -11,7 +11,6 @@ services:
       - "1337:1337"
     volumes:
       - cms-uploads:/app/apps/cms/public/uploads
-      - cms-database:/app/apps/cms/.tmp
 
   web:
     container_name: nextjs_web
@@ -28,4 +27,3 @@ services:
 
 volumes:
   cms-uploads:
-  cms-database:

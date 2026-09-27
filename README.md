@@ -1,159 +1,134 @@
-# Turborepo starter
+# Как запустить проект
 
-This Turborepo starter is maintained by the Turborepo core team.
+## 1) Установка зависимостей
 
-## Using this example
+В корне проекта:
 
-Run the following command:
-
-```sh
-npx create-turbo@latest
+```bash
+npm i
 ```
 
-## What's inside?
+---
 
-This Turborepo includes the following packages/apps:
+## 2) Переменные окружения
 
-### Apps and Packages
+### CMS: apps/cms/.env
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `@next/eslint-plugin-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+Скопируйте пример:
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo build
+```bash
+cd apps/cms
+copy .env.example .env
 ```
 
-Without global `turbo`, use your package manager:
+Пример содержимого `.env`:
 
-```sh
-cd my-turborepo
-npx turbo build
-npm exec turbo build
-npm exec turbo build
+```env
+HOST=0.0.0.0
+PORT=1337
+
+APP_KEYS="change_me_1,change_me_2"
+API_TOKEN_SALT=change_me_api_token_salt
+ADMIN_JWT_SECRET=change_me_admin_jwt_secret
+TRANSFER_TOKEN_SALT=change_me_transfer_token_salt
+JWT_SECRET=change_me_jwt_secret
+
+DATABASE_CLIENT=sqlite
+DATABASE_FILENAME=.tmp/data.db
 ```
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+### Web: apps/web/.env
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+Скопируйте пример:
 
-```sh
-turbo build --filter=docs
+```bash
+cd apps/web
+copy .env.example .env
 ```
 
-Without global `turbo`:
+В `apps/web/.env` используйте адрес Strapi для текущего режима:
 
-```sh
-npx turbo build --filter=docs
-npm exec turbo build --filter=docs
-npm exec turbo build --filter=docs
+```env
+STRAPI_URL=http://127.0.0.1:1337
+# STRAPI_URL=http://cms:1337
 ```
 
-### Develop
+> Для локального запуска активен `127.0.0.1:1337`, для Docker — закомментированный `http://cms:1337`.
 
-To develop all apps and packages, run the following command:
+---
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+## 3) Локальный запуск
 
-```sh
-cd my-turborepo
-turbo dev
+Сначала импортируем дамп базы в Strapi:
+
+```bash
+cd apps/cms
+npx strapi import --file ./data_base.tar.gz --force
 ```
 
-Without global `turbo`, use your package manager:
+После этого запускаем весь проект через Turborepo:
 
-```sh
-cd my-turborepo
-npx turbo dev
-npm exec turbo dev
-npm exec turbo dev
+```bash
+cd ../..
+npm run dev
 ```
 
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+## 4) Docker
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+Сначала импортируем дамп базы:
 
-```sh
-turbo dev --filter=web
+```bash
+cd apps/cms
+npx strapi import --file ./data_base.tar.gz --force
 ```
 
-Without global `turbo`:
+Затем запускаем контейнеры:
 
-```sh
-npx turbo dev --filter=web
-npm exec turbo dev --filter=web
-npm exec turbo dev --filter=web
+```bash
+cd ../..
+docker compose build
+docker compose up -d
 ```
 
-### Remote Caching
+---
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+# Короткий сценарий
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+## Локально через Turborepo
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo login
+```bash
+# локально: в apps/web/.env должно быть STRAPI_URL=http://127.0.0.1:1337
+npm i
+cd apps/cms
+copy .env.example .env
+npx strapi import --file ./data_base.tar.gz --force
+cd ../web
+copy .env.example .env
+cd ../..
+npm run dev
 ```
 
-Without global `turbo`, use your package manager:
+## Через Docker
 
-```sh
-cd my-turborepo
-npx turbo login
-npm exec turbo login
-npm exec turbo login
+```bash
+# в Docker: в apps/web/.env должно быть STRAPI_URL=http://cms:1337
+cd apps/cms
+copy .env.example .env
+npx strapi import --file ./data_base.tar.gz --force
+cd ../web
+copy .env.example .env
+cd ../..
+docker compose build
+docker compose up -d
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+админа от cms для http://localhost:1337
+admin@gmail.com
+admin123
 
-```sh
-turbo link
-```
 
-Without global `turbo`:
-
-```sh
-npx turbo link
-npm exec turbo link
-npm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+акк для входа http://localhost:3000
+user@gmail.com
+user123

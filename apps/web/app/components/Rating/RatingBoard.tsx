@@ -78,7 +78,7 @@ function PodiumPlace({
 
 export default function RatingBoard() {
   return (
-    <div className="mx-auto flex w-[min(346px,calc(100%-32px))] min-w-0 flex-col">
+    <div className="mx-auto flex w-content min-w-0 flex-col">
       <header className="relative flex h-[42px] items-center">
         <Backarrow />
         <h1 className="absolute left-1/2 -translate-x-1/2 text-[15px] leading-[18px] font-semibold text-black">

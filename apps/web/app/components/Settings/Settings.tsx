@@ -10,7 +10,7 @@ export default function Settings() {
   const [isExaminerRequestOn, setIsExaminerRequestOn] = useState(true)
 
   return (
-    <div className="mx-auto flex w-[min(346px,calc(100%-32px))] min-w-0 flex-col">
+    <div className="mx-auto flex w-content min-w-0 flex-col">
       <header className="flex w-[214px] items-center justify-between">
         <Backarrow />
         <h1 className="text-[15px] leading-[normal] font-semibold whitespace-nowrap text-black">Настройки</h1>

@@ -4,7 +4,8 @@
   "info": {
     "singularName": "situation",
     "pluralName": "situations",
-    "displayName": "Situation"
+    "displayName": "Situation",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -28,6 +29,14 @@
     "Choice": {
       "type": "component",
       "repeatable": true,
+      "component": "shared.choice"
+    },
+    "act": {
+      "type": "string"
+    },
+    "time": {
+      "type": "component",
+      "repeatable": false,
       "component": "shared.choice"
     }
   }
