@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@strapi/plugin-cloud": "5.12.4",
+    "@strapi/plugin-documentation": "5.12.4",
     "@strapi/plugin-users-permissions": "5.12.4",
     "@strapi/strapi": "5.12.4",
     "better-sqlite3": "11.3.0",
@@ -25,7 +26,8 @@
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.0.0",
-    "styled-components": "^6.0.0"
+    "styled-components": "^6.0.0",
+    "VSM": "file:../.."
   },
   "devDependencies": {
     "@types/node": "^20",
