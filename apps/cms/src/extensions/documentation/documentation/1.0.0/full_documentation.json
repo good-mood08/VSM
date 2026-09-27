@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2026-09-27T16:30:54.696Z"
+    "x-generation-date": "2026-09-27T20:42:58.444Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -9384,6 +9384,12 @@
                                           "$ref": "#/components/schemas/SharedChoiceComponent"
                                         }
                                       },
+                                      "act": {
+                                        "type": "string"
+                                      },
+                                      "time": {
+                                        "$ref": "#/components/schemas/SharedChoiceComponent"
+                                      },
                                       "createdAt": {
                                         "type": "string",
                                         "format": "date-time"
@@ -12008,6 +12014,12 @@
                                         "items": {
                                           "$ref": "#/components/schemas/SharedChoiceComponent"
                                         }
+                                      },
+                                      "act": {
+                                        "type": "string"
+                                      },
+                                      "time": {
+                                        "$ref": "#/components/schemas/SharedChoiceComponent"
                                       },
                                       "createdAt": {
                                         "type": "string",
@@ -14971,6 +14983,12 @@
                   "$ref": "#/components/schemas/SharedChoiceComponent"
                 }
               },
+              "act": {
+                "type": "string"
+              },
+              "time": {
+                "$ref": "#/components/schemas/SharedChoiceComponent"
+              },
               "createdAt": {
                 "type": "string",
                 "format": "date-time"
@@ -16915,6 +16933,12 @@
                                         "items": {
                                           "$ref": "#/components/schemas/SharedChoiceComponent"
                                         }
+                                      },
+                                      "act": {
+                                        "type": "string"
+                                      },
+                                      "time": {
+                                        "$ref": "#/components/schemas/SharedChoiceComponent"
                                       },
                                       "createdAt": {
                                         "type": "string",
@@ -19303,6 +19327,12 @@
                                             "items": {
                                               "$ref": "#/components/schemas/SharedChoiceComponent"
                                             }
+                                          },
+                                          "act": {
+                                            "type": "string"
+                                          },
+                                          "time": {
+                                            "$ref": "#/components/schemas/SharedChoiceComponent"
                                           },
                                           "createdAt": {
                                             "type": "string",
@@ -21863,6 +21893,12 @@
                                     "$ref": "#/components/schemas/SharedChoiceComponent"
                                   }
                                 },
+                                "act": {
+                                  "type": "string"
+                                },
+                                "time": {
+                                  "$ref": "#/components/schemas/SharedChoiceComponent"
+                                },
                                 "createdAt": {
                                   "type": "string",
                                   "format": "date-time"
@@ -23574,6 +23610,12 @@
                               "items": {
                                 "$ref": "#/components/schemas/SharedChoiceComponent"
                               }
+                            },
+                            "act": {
+                              "type": "string"
+                            },
+                            "time": {
+                              "$ref": "#/components/schemas/SharedChoiceComponent"
                             },
                             "createdAt": {
                               "type": "string",
@@ -25290,6 +25332,12 @@
                   "$ref": "#/components/schemas/SharedChoiceComponent"
                 }
               },
+              "act": {
+                "type": "string"
+              },
+              "time": {
+                "$ref": "#/components/schemas/SharedChoiceComponent"
+              },
               "locale": {
                 "type": "string"
               },
@@ -25407,6 +25455,12 @@
                       "items": {
                         "$ref": "#/components/schemas/SharedChoiceComponent"
                       }
+                    },
+                    "act": {
+                      "type": "string"
+                    },
+                    "time": {
+                      "$ref": "#/components/schemas/SharedChoiceComponent"
                     },
                     "createdAt": {
                       "type": "string",
@@ -27651,6 +27705,12 @@
               "$ref": "#/components/schemas/SharedChoiceComponent"
             }
           },
+          "act": {
+            "type": "string"
+          },
+          "time": {
+            "$ref": "#/components/schemas/SharedChoiceComponent"
+          },
           "createdAt": {
             "type": "string",
             "format": "date-time"
@@ -29340,6 +29400,12 @@
                                             "items": {
                                               "$ref": "#/components/schemas/SharedChoiceComponent"
                                             }
+                                          },
+                                          "act": {
+                                            "type": "string"
+                                          },
+                                          "time": {
+                                            "$ref": "#/components/schemas/SharedChoiceComponent"
                                           },
                                           "createdAt": {
                                             "type": "string",
@@ -31923,6 +31989,12 @@
                                               "items": {
                                                 "$ref": "#/components/schemas/SharedChoiceComponent"
                                               }
+                                            },
+                                            "act": {
+                                              "type": "string"
+                                            },
+                                            "time": {
+                                              "$ref": "#/components/schemas/SharedChoiceComponent"
                                             },
                                             "createdAt": {
                                               "type": "string",
@@ -34812,6 +34884,12 @@
                           "$ref": "#/components/schemas/SharedChoiceComponent"
                         }
                       },
+                      "act": {
+                        "type": "string"
+                      },
+                      "time": {
+                        "$ref": "#/components/schemas/SharedChoiceComponent"
+                      },
                       "createdAt": {
                         "type": "string",
                         "format": "date-time"
@@ -37279,6 +37357,12 @@
                         "items": {
                           "$ref": "#/components/schemas/SharedChoiceComponent"
                         }
+                      },
+                      "act": {
+                        "type": "string"
+                      },
+                      "time": {
+                        "$ref": "#/components/schemas/SharedChoiceComponent"
                       },
                       "createdAt": {
                         "type": "string",
