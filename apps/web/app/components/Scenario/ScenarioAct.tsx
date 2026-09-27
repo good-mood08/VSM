@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Image from 'next/image'
 import Backarrow from '@/components/ui/Back_arrow'
 import Button from '@/components/ui/Button'
+import Divider from '@/components/ui/Divider'
 
 type ActChoice = {
   id: string
@@ -26,7 +27,7 @@ export default function ScenarioAct({ mode, title, sceneTitle, sceneText, choice
   const [selectedChoiceId, setSelectedChoiceId] = useState(choices[0]?.id ?? '')
 
   return (
-    <div className="mx-auto flex w-[min(346px,calc(100%-32px))] min-w-0 flex-col">
+    <div className="mx-auto flex w-content min-w-0 flex-col">
       <header className={`relative flex h-[42px] items-center ${mode === 'train' ? 'justify-between' : ''}`}>
         <Backarrow />
         <h1
@@ -47,7 +48,7 @@ export default function ScenarioAct({ mode, title, sceneTitle, sceneText, choice
 
       <div className="mt-8 flex flex-col gap-[22px]">
         <h2 className="text-[24px] leading-[28px] font-semibold tracking-[-0.24px] text-black">Акт 1. Посадка</h2>
-        {mode === 'train' ? <Divider /> : <div className="h-px w-full bg-black" />}
+        <Divider />
         <div className="flex flex-col gap-2">
           <h3
             className={`text-[15px] font-semibold text-black ${mode === 'exam' ? 'leading-[normal]' : 'leading-[18px]'}`}
@@ -112,7 +113,7 @@ export default function ScenarioAct({ mode, title, sceneTitle, sceneText, choice
 
         {mode === 'exam' ? (
           <>
-            <div className="h-px w-full bg-black" />
+            <Divider />
             <div className="flex flex-col gap-3">
               <div className="flex w-full items-center justify-between rounded-[16px] border border-[#CBCBCB] bg-white px-[18px] py-4">
                 <span className="flex items-center gap-2">
@@ -148,10 +149,6 @@ export default function ScenarioAct({ mode, title, sceneTitle, sceneText, choice
       </div>
     </div>
   )
-}
-
-function Divider() {
-  return <img src="/svg/notifications/divider.svg" width={347} height={2} alt="" className="block h-[1.2px] w-full" />
 }
 
 function scoreClassName(delta: string, isSelected: boolean) {

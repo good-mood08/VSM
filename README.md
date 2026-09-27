@@ -1,4 +1,4 @@
-# Как развернуть проект локально
+# Как запустить проект
 
 ## 1) Установка зависимостей
 
@@ -8,157 +8,127 @@
 npm i
 ```
 
-## 2) Strapi CMS
+---
 
-Переходим в папку CMS:
+## 2) Переменные окружения
+
+### CMS: apps/cms/.env
+
+Скопируйте пример:
 
 ```bash
 cd apps/cms
-```
-
-Создаём файл `.env` на основе примера:
-
-```bash
 copy .env.example .env
 ```
 
-Дальше собираем и запускаем Strapi:
+Пример содержимого `.env`:
 
-```bash
-npm run build
+```env
+HOST=0.0.0.0
+PORT=1337
 
-npx strapi import --file ./data_base.tar.gz.enc --force
+APP_KEYS="change_me_1,change_me_2"
+API_TOKEN_SALT=change_me_api_token_salt
+ADMIN_JWT_SECRET=change_me_admin_jwt_secret
+TRANSFER_TOKEN_SALT=change_me_transfer_token_salt
+JWT_SECRET=change_me_jwt_secret
 
+DATABASE_CLIENT=sqlite
+DATABASE_FILENAME=.tmp/data.db
 ```
 
+### Web: apps/web/.env
 
-
-
-После этого CMS будет доступен по адресу:
-
-- http://localhost:1337/admin
-
-## 3) Frontend
-
-В другом терминале:
+Скопируйте пример:
 
 ```bash
 cd apps/web
-npm run dev
+copy .env.example .env
 ```
 
-Frontend будет доступен по адресу:
+В `apps/web/.env` используйте адрес Strapi для текущего режима:
 
-- http://localhost:3000
+```env
+STRAPI_URL=http://127.0.0.1:1337
+# STRAPI_URL=http://cms:1337
+```
+
+> Для локального запуска активен `127.0.0.1:1337`, для Docker — закомментированный `http://cms:1337`.
 
 ---
 
-# Как развернуть через Docker
+## 3) Локальный запуск
 
-Важно: перед сборкой контейнеров сначала нужно подготовить и импортировать базу данных, чтобы она попала в Docker-образ/контекст. Иначе контейнер запустится пустым.
-
-## 1) Подготовить переменные окружения
-
-В папке `apps/cms` создайте `.env` из `.env.example`:
+Сначала импортируем дамп базы в Strapi:
 
 ```bash
 cd apps/cms
-copy .env.example .env
+npx strapi import --file ./data_base.tar.gz --force
 ```
 
-Также создайте файл `apps/web/.env` для Docker:
+После этого запускаем весь проект через Turborepo:
 
 ```bash
-cd apps/web
-copy NUL .env
+cd ../..
+npm run dev
 ```
 
-Внутри `.env` можно оставить примерно так:
+## 4) Docker
 
-```env
-STRAPI_API_URL=http://cms:1337
-NODE_ENV=production
-```
-
-## 2) Подготовить дамп базы
-
-Если у вас уже есть готовый экспорт базы, положите его в папку `apps/cms`, например:
-
-```bash
-apps/cms/export_20260927035427.tar.gz.enc
-```
-
-Если дампа ещё нет — сначала запускаем локальный Strapi и делаем экспорт:
+Сначала импортируем дамп базы:
 
 ```bash
 cd apps/cms
-npm run develop
+npx strapi import --file ./data_base.tar.gz --force
 ```
 
-В другом окне:
+Затем запускаем контейнеры:
 
 ```bash
-cd apps/cms
-npx strapi export --no-encrypt --file ./data_base
-```
-
-После этого файл `data_base.tar.gz` уже находится в проекте и его можно использовать в Docker.
-
-## 3) Собрать и запустить Docker
-
-Из корня проекта:
-
-```bash
+cd ../..
 docker compose build
 docker compose up -d
 ```
 
-Если в `apps/cms` есть файл `data_base.tar.gz` (или `data_base.tar.gz.enc` для старого варианта), то контейнер при старте сам импортирует его в Strapi перед запуском приложения.
-
-Типичный сценарий:
-
-```bash
-cd apps/cms
-npx strapi export --no-encrypt --file ./data_base
-cd ../..
-docker compose up --build -d
-```
-
-После этого:
-
-- CMS: http://localhost:1337
-- Web: http://localhost:3000
-
-> Ключевая идея: сначала делаем экспорт базы и кладём её рядом с проектом / в контекст сборки Docker, потом запускаем сборку. Только так база реально попадёт в контейнер и не будет пустой после старта.
-
 ---
 
-# Быстрый сценарий
+# Короткий сценарий
 
-Локально:
+## Локально через Turborepo
 
 ```bash
+# локально: в apps/web/.env должно быть STRAPI_URL=http://127.0.0.1:1337
 npm i
 cd apps/cms
 copy .env.example .env
-npm run build
 npx strapi import --file ./data_base.tar.gz --force
-npm run develop
-```
-
-В другом терминале:
-
-```bash
-cd apps/web
+cd ../web
+copy .env.example .env
+cd ../..
 npm run dev
 ```
 
-Через Docker:
+## Через Docker
 
 ```bash
+# в Docker: в apps/web/.env должно быть STRAPI_URL=http://cms:1337
 cd apps/cms
 copy .env.example .env
-npx strapi export --no-encrypt --file ./data_base
+npx strapi import --file ./data_base.tar.gz --force
+cd ../web
+copy .env.example .env
 cd ../..
-docker compose up --build -d
+docker compose build
+docker compose up -d
 ```
+
+
+
+админа от cms для http://localhost:1337
+admin@gmail.com
+admin123
+
+
+акк для входа http://localhost:3000
+user@gmail.com
+user123

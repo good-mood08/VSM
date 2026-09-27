@@ -8,7 +8,7 @@ type NotificationViewProps = {
 
 export default function NotificationView({ notification }: NotificationViewProps) {
   return (
-    <div className="mx-auto flex w-[min(346px,calc(100%-32px))] min-w-0 flex-col">
+    <div className="mx-auto flex w-content min-w-0 flex-col">
       <header className="flex w-[227px] items-center justify-between">
         <Backarrow />
         <h1 className="w-[108px] text-center text-[15px] leading-[normal] font-semibold text-black">Уведомление:</h1>

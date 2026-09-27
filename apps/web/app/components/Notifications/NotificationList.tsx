@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { Fragment, useState } from 'react'
 import Backarrow from '@/components/ui/Back_arrow'
+import Divider from '@/components/ui/Divider'
 import { notifications } from '@/components/Notifications/notifications'
 
 type NotificationFilter = 'all' | 'unread'
@@ -18,7 +19,7 @@ export default function NotificationList() {
     filter === 'unread' ? notifications.filter((notification) => notification.isUnread) : notifications
 
   return (
-    <div className="mx-auto flex w-[min(346px,calc(100%-32px))] min-w-0 flex-col">
+    <div className="mx-auto flex w-content min-w-0 flex-col">
       <header className="flex w-[224px] items-center justify-between">
         <Backarrow />
         <h1 className="text-[15px] leading-[normal] font-semibold whitespace-nowrap text-black">Уведомления</h1>
@@ -70,7 +71,7 @@ export default function NotificationList() {
                 {notification.preview}
               </span>
             </Link>
-            <img src="/svg/notifications/divider.svg" width={347} height={2} alt="" className="block h-px w-full" />
+            <Divider />
           </Fragment>
         ))}
       </div>

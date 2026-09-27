@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Bullet from '@/components/Home/Bullet'
 import Button from '@/components/ui/Button'
+import Divider from '@/components/ui/Divider'
 
 const situationRows = [
   ['Первая помощь', 'Безопасность'],
@@ -19,7 +20,7 @@ export default function SuperScenario() {
           className="absolute top-[-9.24%] left-[0.06%] h-[113.45%] w-[99.93%] max-w-none"
         />
       </div>
-      <div className="h-px w-full bg-black" />
+      <Divider />
       <div className="flex w-full flex-col gap-6">
         <div className="flex flex-col gap-[18px]">
           <div className="flex flex-col gap-2">

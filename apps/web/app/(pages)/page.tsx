@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { fetchCurrentUser } from '@/api/me/me'
 import ExamCard from '@/components/Home/ExamCard'
 import SuperScenario from '@/components/Home/SuperScenario'
 import NavPanel from '@/components/Links/NavPanel'
@@ -23,15 +24,17 @@ const upcomingExams = [
   },
 ]
 
-export default function Home() {
+export default async function Home() {
+  const user = await fetchCurrentUser()
+
   return (
     <div className="min-h-screen bg-white pt-[82px] pb-30">
-      <div className="mx-auto flex w-[min(346px,calc(100%-32px))] min-w-0 flex-col">
+      <div className="mx-auto flex w-content min-w-0 flex-col">
         <header className="flex items-center justify-between">
           <h1 className="max-w-[204px] min-w-0 font-rail text-[26px] leading-[28px] tracking-[-0.26px] text-[#EE3524]">
             Добрый день,
             <br />
-            Артур!
+            {user.username}!
           </h1>
           <Link href="/notifications" aria-label="Уведомления" className="relative size-[30px] shrink-0">
             <Image src="/svg/notifications/empty.svg" width={30} height={30} alt="" />

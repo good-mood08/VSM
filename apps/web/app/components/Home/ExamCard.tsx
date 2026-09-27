@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Bullet from '@/components/Home/Bullet'
 import Button from '@/components/ui/Button'
+import Divider from '@/components/ui/Divider'
 
 type ExamCardProps = {
   title: string
@@ -14,7 +15,7 @@ export default function ExamCard({ title, description, time, role, imageSrc }: E
   return (
     <article className="flex w-[min(300px,calc(100%-46px))] shrink-0 flex-col items-center gap-6 rounded-[18px] border border-black bg-white p-6">
       <Image src={imageSrc} width={252} height={178} alt="" className="h-[178px] w-full object-cover" />
-      <div className="h-px w-full bg-black" />
+      <Divider />
       <div className="flex w-full flex-col gap-6">
         <div className="flex flex-col gap-[18px]">
           <div className="flex flex-col gap-2">
