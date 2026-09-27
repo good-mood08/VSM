@@ -19,7 +19,7 @@ export default function NavigationLink({href, title, index, currentPage}: ILink)
             ) : (
                 <ProfileLink current={currentPage === '/profile'}/>
             )}
-            <span className={`${currentPage === href ? 'text-accent' : 'text-main'} text-[10px]`}>{title}</span>
+            <span className={`${currentPage === href ? 'text-accent-1' : 'text-main'} text-[10px]`}>{title}</span>
         </Link>
     )
 }

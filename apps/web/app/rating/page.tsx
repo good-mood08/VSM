@@ -1,6 +1,7 @@
 import Backarrow from "../components/Back_arrow";
 import NavPanel from "../components/Links/NavPanel";
 import Top from "../components/Rating/Top";
+import Toppy from '../components/Rating/Toppy';
 
 interface IToppy{
     name: string
@@ -12,21 +13,21 @@ const Top1: Array<IToppy> = [
         {
         name: 'Артур',
         points: 5.00,
-        img: '/png/Artur.png'
+        img: '/png/Artur.png',
     },
     {
         name: 'Александр',
         points: 4.96,
-        img: '/png/Alex.png'
+        img: '/png/Alex.png',
     },
     {
         name: 'Мария',
         points: 4.85,
-        img: '/png/Maria.png'
+        img: '/png/Maria.png',
     }
 ]
 
-const Toppy: Array<IToppy> = [
+const Toppy1: Array<IToppy> = [
     {
         name: 'Екатерина',
         points: 4.82,
@@ -35,7 +36,7 @@ const Toppy: Array<IToppy> = [
     {
         name: 'Олег',
         points: 4.8,
-        img: '/png/Kate.png'
+        img: '/png/Oleg.jpg'
     },
     {
         name: 'Дмитрий',
@@ -45,7 +46,7 @@ const Toppy: Array<IToppy> = [
     {
         name: 'Арина',
         points: 4.64,
-        img: '/png/Arina.png'
+        img: '/png/Arina.jpg'
     },
     {
         name: 'Ирина',
@@ -64,19 +65,21 @@ export default function Rating(){
                 </header>
                 <main>
                     <div>
-                        {Top1.map((top: IToppy, index: number) => (
-                            <Top 
-                                name={top.name}
-                                points={top.points}
-                                img={top.img}
-                                position={index}
-                            />
-                        ))}
-                        {/* {Toppy.map((toppy: IToppy, index: number) => (
-                            <Toppy />
-                        ))} */}
+                        <Top 
+                            top={Top1}
+                        />
+                        <div className="flex flex-col gap-2.5">
+                            {Toppy1.map((toppy: IToppy, index: number) => (
+                                <Toppy 
+                                    img={toppy.img}
+                                    name={toppy.name}
+                                    points={toppy.points}
+                                    position={index}
+                                    key={index}
+                                />
+                            ))}
+                        </div>
                     </div>
-                    
                 </main>
             </div>
             <NavPanel />
