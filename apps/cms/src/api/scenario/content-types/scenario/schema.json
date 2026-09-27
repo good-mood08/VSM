@@ -28,21 +28,6 @@
         "audios"
       ]
     },
-    "user_datasses": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::user-datass.user-datass",
-      "mappedBy": "scenario"
-    },
-    "types": {
-      "type": "enumeration",
-      "enum": [
-        "Ex:",
-        "HEALTH",
-        "JUSTICE",
-        "TECHNICAL"
-      ]
-    },
     "complexity": {
       "type": "enumeration",
       "enum": [
@@ -57,6 +42,34 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::user-scenario.user-scenario",
+      "mappedBy": "scenario"
+    },
+    "icon": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "game": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::game.game",
+      "inversedBy": "scenarios"
+    },
+    "type": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.numer"
+    },
+    "user_datasses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::user-datass.user-datass",
       "mappedBy": "scenario"
     }
   }

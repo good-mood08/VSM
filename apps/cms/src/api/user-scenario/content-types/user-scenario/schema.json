@@ -4,23 +4,33 @@
   "info": {
     "singularName": "user-scenario",
     "pluralName": "user-scenarios",
-    "displayName": "user-scenario"
+    "displayName": "user-scenario",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "attributes": {
+    "scenario": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::scenario.scenario",
+      "inversedBy": "user_scenarios"
+    },
     "users_permissions_user": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "user_scenarios"
     },
-    "scenario": {
+    "date": {
+      "type": "datetime"
+    },
+    "examinee": {
       "type": "relation",
       "relation": "manyToOne",
-      "target": "api::scenario.scenario",
-      "inversedBy": "user_scenarios"
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "user_scenarios_examinee"
     }
   }
 }

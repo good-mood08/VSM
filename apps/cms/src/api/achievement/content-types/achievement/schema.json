@@ -4,7 +4,8 @@
   "info": {
     "singularName": "achievement",
     "pluralName": "achievements",
-    "displayName": "achievement"
+    "displayName": "achievement",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -22,17 +23,15 @@
       "target": "api::user-achivment.user-achivment",
       "mappedBy": "achievement"
     },
-    "user_datass": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::user-datass.user-datass",
-      "inversedBy": "achievements"
-    },
-    "verifier": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::verifier.verifier",
-      "mappedBy": "achievement"
+    "icon": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

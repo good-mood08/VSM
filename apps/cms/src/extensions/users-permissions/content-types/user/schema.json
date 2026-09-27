@@ -78,19 +78,47 @@
       "mappedBy": "users_permissions_user"
     },
     "avatar": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "notifications_users": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::notifications-user.notifications-user",
+      "mappedBy": "users_permissions_user"
+    },
+    "isInspector": {
+      "type": "boolean"
     },
     "user_scenarios": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::user-scenario.user-scenario",
+      "mappedBy": "users_permissions_user"
+    },
+    "user_scenarios_examinee": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::user-scenario.user-scenario",
+      "mappedBy": "examinee"
+    },
+    "rating": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::rating.rating",
+      "mappedBy": "users_permissions_user"
+    },
+    "user_datasses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::user-datass.user-datass",
       "mappedBy": "users_permissions_user"
     }
   }

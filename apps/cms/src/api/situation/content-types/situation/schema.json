@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "situations",
+  "info": {
+    "singularName": "situation",
+    "pluralName": "situations",
+    "displayName": "Situation"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "games": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::game.game",
+      "mappedBy": "situation"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "isFinal": {
+      "type": "boolean"
+    },
+    "Choice": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.choice"
+    }
+  }
+}

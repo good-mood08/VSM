@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_shared_types",
+  "info": {
+    "displayName": "type"
+  },
+  "options": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "First aid",
+        "Safety",
+        "Conflict",
+        "Evacuation",
+        "Service"
+      ]
+    }
+  }
+}

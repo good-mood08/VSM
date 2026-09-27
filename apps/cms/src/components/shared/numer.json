@@ -1,0 +1,22 @@
+{
+  "collectionName": "components_shared_numers",
+  "info": {
+    "displayName": "numer",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "First aid",
+        "Safety",
+        "Conflict",
+        "Evacuation",
+        "Service",
+        "Multitasking",
+        "Crush"
+      ]
+    }
+  }
+}
