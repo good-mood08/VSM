@@ -4,7 +4,8 @@
   "info": {
     "singularName": "user-competition",
     "pluralName": "user-competitions",
-    "displayName": "user competition"
+    "displayName": "user competition",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,9 +13,9 @@
   "attributes": {
     "competitions": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToMany",
       "target": "api::competition.competition",
-      "mappedBy": "user_competition"
+      "inversedBy": "user_competitions"
     },
     "users_permissions_user": {
       "type": "relation",

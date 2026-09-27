@@ -4,6 +4,8 @@ import axios from 'axios';
 import Image from 'next/image';
 import { useRouter, useSearchParams } from 'next/navigation';
 import React, { useState } from 'react';
+import Button from '@/components/ui/Button';
+import Input from '@/components/ui/Input';
 
 interface ILogged {
   onChange?: () => void;
@@ -53,9 +55,9 @@ export default function LoginPage({ onChange }: ILogged) {
     <div className="w-full max-w-sm px-0">
       <div className="mb-8 flex flex-col items-center gap-5 text-center">
         <div className="flex items-center justify-center">
-          <Image src={'/svg/rzd-logo.svg'} width={90} height={40} alt="rzd-logo" className="h-auto w-24" />
+          <Image src={'/svg/shared/rzd-logo.svg'} width={90} height={40} alt="rzd-logo" className="h-auto w-24" />
         </div>
-        <h2 className="font-ru-rail text-h3 text-accent">
+        <h2 className="font-rail text-h3 text-accent">
           С Возвращением!
         </h2>
       </div>
@@ -65,13 +67,12 @@ export default function LoginPage({ onChange }: ILogged) {
           <label htmlFor="login" className="block text-h6 font-semibold text-addition">
             Email
           </label>
-          <input
+          <Input
             id="login"
             type="email"
             value={login}
             onChange={(ev) => setLogin(ev.target.value)}
             placeholder="Ваша почта"
-            className="w-full rounded-full border border-border bg-transparent px-7 py-4 text-h6 text-main outline-none placeholder:text-addition focus:border-accent"
           />
         </div>
 
@@ -94,19 +95,15 @@ export default function LoginPage({ onChange }: ILogged) {
               onClick={() => setShowPassword((prev) => !prev)}
               className="flex h-6 w-6 items-center justify-center text-addition"
             >
-                <Image src={'/svg/eye.svg'} width={24} height={24} alt="eye" />
+                <Image src={'/svg/shared/eye.svg'} width={24} height={24} alt="eye" />
             </button>
           </div>
         </div>
       </form>
 
-      <button
-        type="submit"
-        form="login-form"
-        className="mt-8 flex w-full items-center justify-center rounded-full bg-accent py-4 text-h6 font-bold text-white transition hover:bg-accent/90"
-      >
+      <Button type="submit" form="login-form" className="mt-8">
         Войти
-      </button>
+      </Button>
 
       {status.type !== 'idle' && (
         <div
@@ -126,7 +123,7 @@ export default function LoginPage({ onChange }: ILogged) {
         className="mt-5 flex w-full items-center justify-center gap-3 rounded-full border border-main bg-transparent py-4 text-h6 font-semibold text-main transition hover:border-accent hover:text-accent"
       >
         <div className="h-5 w-11">
-          <Image src={'/svg/rzd-logo.svg'} width={44} height={20} alt="rzd-logo" className="h-full w-full" />
+          <Image src={'/svg/shared/rzd-logo.svg'} width={44} height={20} alt="rzd-logo" className="h-full w-full" />
         </div>
         <span>Продолжить с РЖД</span>
       </button>

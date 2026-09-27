@@ -372,6 +372,7 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
 export interface ApiAchievementAchievement extends Struct.CollectionTypeSchema {
   collectionName: 'achievements';
   info: {
+    description: '';
     displayName: 'achievement';
     pluralName: 'achievements';
     singularName: 'achievement';
@@ -384,6 +385,7 @@ export interface ApiAchievementAchievement extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Blocks;
+    icon: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -399,11 +401,6 @@ export interface ApiAchievementAchievement extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::user-achivment.user-achivment'
     >;
-    user_datass: Schema.Attribute.Relation<
-      'manyToOne',
-      'api::user-datass.user-datass'
-    >;
-    verifier: Schema.Attribute.Relation<'oneToOne', 'api::verifier.verifier'>;
   };
 }
 
@@ -433,10 +430,147 @@ export interface ApiCompetitionCompetition extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    user_competition: Schema.Attribute.Relation<
-      'manyToOne',
+    user_competitions: Schema.Attribute.Relation<
+      'manyToMany',
       'api::user-competition.user-competition'
     >;
+  };
+}
+
+export interface ApiGameGame extends Struct.CollectionTypeSchema {
+  collectionName: 'games';
+  info: {
+    description: '';
+    displayName: 'game';
+    pluralName: 'games';
+    singularName: 'game';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Blocks;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::game.game'> &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    scenarios: Schema.Attribute.Relation<'oneToMany', 'api::scenario.scenario'>;
+    situation: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::situation.situation'
+    >;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiNotificationNotification
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'notifications';
+  info: {
+    displayName: 'Notification';
+    pluralName: 'notifications';
+    singularName: 'notification';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::notification.notification'
+    > &
+      Schema.Attribute.Private;
+    message: Schema.Attribute.Blocks;
+    name: Schema.Attribute.String;
+    notifications_users: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::notifications-user.notifications-user'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiNotificationsUserNotificationsUser
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'notifications_users';
+  info: {
+    description: '';
+    displayName: 'Notifications-user';
+    pluralName: 'notifications-users';
+    singularName: 'notifications-user';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    isRead: Schema.Attribute.Boolean;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::notifications-user.notifications-user'
+    > &
+      Schema.Attribute.Private;
+    notification: Schema.Attribute.Relation<
+      'manyToOne',
+      'api::notification.notification'
+    >;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    users_permissions_user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+  };
+}
+
+export interface ApiRatingRating extends Struct.CollectionTypeSchema {
+  collectionName: 'ratings';
+  info: {
+    displayName: 'rating';
+    pluralName: 'ratings';
+    singularName: 'rating';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::rating.rating'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    users_permissions_user: Schema.Attribute.Relation<
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    value: Schema.Attribute.Decimal;
   };
 }
 
@@ -459,6 +593,11 @@ export interface ApiScenarioScenario extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
+    game: Schema.Attribute.Relation<'manyToOne', 'api::game.game'>;
+    icon: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
     img: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -468,9 +607,7 @@ export interface ApiScenarioScenario extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
-    types: Schema.Attribute.Enumeration<
-      ['Ex:', 'HEALTH', 'JUSTICE', 'TECHNICAL']
-    >;
+    type: Schema.Attribute.Component<'shared.numer', true>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -482,6 +619,38 @@ export interface ApiScenarioScenario extends Struct.CollectionTypeSchema {
       'oneToMany',
       'api::user-scenario.user-scenario'
     >;
+  };
+}
+
+export interface ApiSituationSituation extends Struct.CollectionTypeSchema {
+  collectionName: 'situations';
+  info: {
+    displayName: 'Situation';
+    pluralName: 'situations';
+    singularName: 'situation';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Choice: Schema.Attribute.Component<'shared.choice', true>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.String;
+    games: Schema.Attribute.Relation<'oneToMany', 'api::game.game'>;
+    isFinal: Schema.Attribute.Boolean;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::situation.situation'
+    > &
+      Schema.Attribute.Private;
+    name: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
   };
 }
 
@@ -526,6 +695,7 @@ export interface ApiUserCompetitionUserCompetition
   extends Struct.CollectionTypeSchema {
   collectionName: 'user_competitions';
   info: {
+    description: '';
     displayName: 'user competition';
     pluralName: 'user-competitions';
     singularName: 'user-competition';
@@ -535,7 +705,7 @@ export interface ApiUserCompetitionUserCompetition
   };
   attributes: {
     competitions: Schema.Attribute.Relation<
-      'oneToMany',
+      'manyToMany',
       'api::competition.competition'
     >;
     createdAt: Schema.Attribute.DateTime;
@@ -570,10 +740,6 @@ export interface ApiUserDatassUserDatass extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    achievements: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::achievement.achievement'
-    >;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -590,6 +756,10 @@ export interface ApiUserDatassUserDatass extends Struct.CollectionTypeSchema {
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    users_permissions_user: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
   };
 }
 
@@ -597,6 +767,7 @@ export interface ApiUserScenarioUserScenario
   extends Struct.CollectionTypeSchema {
   collectionName: 'user_scenarios';
   info: {
+    description: '';
     displayName: 'user-scenario';
     pluralName: 'user-scenarios';
     singularName: 'user-scenario';
@@ -608,6 +779,11 @@ export interface ApiUserScenarioUserScenario
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    date: Schema.Attribute.DateTime;
+    examinee: Schema.Attribute.Relation<
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -623,37 +799,6 @@ export interface ApiUserScenarioUserScenario
       'manyToOne',
       'plugin::users-permissions.user'
     >;
-  };
-}
-
-export interface ApiVerifierVerifier extends Struct.CollectionTypeSchema {
-  collectionName: 'verifiers';
-  info: {
-    displayName: 'verifier';
-    pluralName: 'verifiers';
-    singularName: 'verifier';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    achievement: Schema.Attribute.Relation<
-      'oneToOne',
-      'api::achievement.achievement'
-    >;
-    createdAt: Schema.Attribute.DateTime;
-    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
-    locale: Schema.Attribute.String & Schema.Attribute.Private;
-    localizations: Schema.Attribute.Relation<
-      'oneToMany',
-      'api::verifier.verifier'
-    > &
-      Schema.Attribute.Private;
-    publishedAt: Schema.Attribute.DateTime;
-    updatedAt: Schema.Attribute.DateTime;
-    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
-      Schema.Attribute.Private;
   };
 }
 
@@ -1126,12 +1271,17 @@ export interface PluginUsersPermissionsUser
       Schema.Attribute.SetMinMaxLength<{
         minLength: 6;
       }>;
+    isInspector: Schema.Attribute.Boolean;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'plugin::users-permissions.user'
     > &
       Schema.Attribute.Private;
+    notifications_users: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::notifications-user.notifications-user'
+    >;
     password: Schema.Attribute.Password &
       Schema.Attribute.Private &
       Schema.Attribute.SetMinMaxLength<{
@@ -1139,6 +1289,7 @@ export interface PluginUsersPermissionsUser
       }>;
     provider: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    rating: Schema.Attribute.Relation<'oneToOne', 'api::rating.rating'>;
     resetPasswordToken: Schema.Attribute.String & Schema.Attribute.Private;
     role: Schema.Attribute.Relation<
       'manyToOne',
@@ -1155,7 +1306,15 @@ export interface PluginUsersPermissionsUser
       'oneToMany',
       'api::user-competition.user-competition'
     >;
+    user_datasses: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::user-datass.user-datass'
+    >;
     user_scenarios: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::user-scenario.user-scenario'
+    >;
+    user_scenarios_examinee: Schema.Attribute.Relation<
       'oneToMany',
       'api::user-scenario.user-scenario'
     >;
@@ -1180,12 +1339,16 @@ declare module '@strapi/strapi' {
       'admin::user': AdminUser;
       'api::achievement.achievement': ApiAchievementAchievement;
       'api::competition.competition': ApiCompetitionCompetition;
+      'api::game.game': ApiGameGame;
+      'api::notification.notification': ApiNotificationNotification;
+      'api::notifications-user.notifications-user': ApiNotificationsUserNotificationsUser;
+      'api::rating.rating': ApiRatingRating;
       'api::scenario.scenario': ApiScenarioScenario;
+      'api::situation.situation': ApiSituationSituation;
       'api::user-achivment.user-achivment': ApiUserAchivmentUserAchivment;
       'api::user-competition.user-competition': ApiUserCompetitionUserCompetition;
       'api::user-datass.user-datass': ApiUserDatassUserDatass;
       'api::user-scenario.user-scenario': ApiUserScenarioUserScenario;
-      'api::verifier.verifier': ApiVerifierVerifier;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

@@ -20,11 +20,11 @@
       "target": "api::scenario.scenario",
       "inversedBy": "user_datasses"
     },
-    "achievements": {
+    "users_permissions_user": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::achievement.achievement",
-      "mappedBy": "user_datass"
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "user_datasses"
     },
     "date": {
       "type": "date"

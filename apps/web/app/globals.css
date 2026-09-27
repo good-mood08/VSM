@@ -1,80 +1,88 @@
 @import "tailwindcss";
 
 @theme {
-
-  --color-accent: #ee3524;
+  --color-accent: #E21A1A;
+  --color-accent-2: #FFC800;
   --color-main: #000000;
   --color-addition: #727272;
-  --color-border: #cbcbcb;
-  --color-page: #ffffff;
-
-  --color-accent-1: #EE3524;
-  --color-accent-2: #FFC800;
-  --color-gray-1: #727272;
-  --color-gray-2: #CBCBCB;
+  --color-border: #CBCBCB;
   --color-gray-3: #F5F5F5;
+  --color-page: #FFFFFF;
 
+  --text-h1: 70px;
+  --text-h1--line-height: 92px;
+  --text-h1--font-weight: 700;
 
-  --font-ru-rail: var(--font-rurail), sans-serif;
-  --font-inter: var(--font-inter), sans-serif;
-  --font-rail: var(--font-rurail), sans-serif;
+  --text-h2: 48px;
+  --text-h2--line-height: 64px;
+  --text-h2--font-weight: 700;
+
+  --text-h3: 28px;
+  --text-h3--line-height: 48px;
+  --text-h3--font-weight: 600;
+
+  --text-h4: 24px;
+  --text-h4--line-height: 40px;
+  --text-h4--font-weight: 700;
+
+  --text-h5: 20px;
+  --text-h5--line-height: 32px;
+  --text-h5--font-weight: 600;
+
+  --text-h6: 18px;
+  --text-h6--line-height: 28px;
+  --text-h6--font-weight: 500;
+
+  --animate-dialog-in: dialog-in 200ms ease-out both;
+  --animate-dialog-out: dialog-out 200ms ease-in both;
+  --animate-backdrop-in: backdrop-in 200ms ease-out both;
+  --animate-backdrop-out: backdrop-out 200ms ease-in both;
+
+  @keyframes dialog-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes dialog-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes backdrop-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes backdrop-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+}
+
+@theme inline {
+  --font-sans: var(--font-inter), sans-serif;
+  --font-rail: var(--font-ru-rail), sans-serif;
 }
 
 @layer base {
   html {
-    font-family: var(--font-inter);
     background-color: var(--color-page);
     color: var(--color-main);
   }
-
-  body {
-    font-family: var(--font-inter), sans-serif;
-    background: var(--color-page);
-    color: var(--color-main);
-  }
 }
-
-@layer utilities {
-  .text-h1 {
-    font-size: 4.375rem;
-    line-height: 5.75rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-  }
-
-  .text-h2 {
-    font-size: 3rem;
-    line-height: 4rem;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-  }
-
-  .text-h3 {
-    font-size: 1.75rem;
-    line-height: 3rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-  }
-
-  .text-h4 {
-    font-size: 1.5rem;
-    line-height: 2.5rem;
-    font-weight: 700;
-    letter-spacing: -0.01em;
-  }
-
-  .text-h5 {
-    font-size: 1.25rem;
-    line-height: 2rem;
-    font-weight: 600;
-    letter-spacing: -0.01em;
-  }
-
-  .text-h6 {
-    font-size: 1.125rem;
-    line-height: 1.75rem;
-    font-weight: 500;
-  }
-
-}
-

@@ -19,7 +19,13 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  if (pathname === '/login') {
+  const isPublicAuthPage =
+    pathname === '/login' ||
+    pathname.startsWith('/login/') ||
+    pathname === '/signup' ||
+    pathname.startsWith('/signup/')
+
+  if (isPublicAuthPage) {
     if (hasJwt) {
       return NextResponse.redirect(new URL('/', request.url));
     }

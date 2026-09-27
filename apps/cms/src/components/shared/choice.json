@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_shared_choices",
+  "info": {
+    "displayName": "Choice",
+    "icon": "cursor",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "loyalty": {
+      "type": "integer"
+    },
+    "safety": {
+      "type": "integer"
+    },
+    "situation": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::situation.situation"
+    }
+  }
+}

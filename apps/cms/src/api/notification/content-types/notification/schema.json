@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "notifications",
+  "info": {
+    "singularName": "notification",
+    "pluralName": "notifications",
+    "displayName": "Notification"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "message": {
+      "type": "blocks"
+    },
+    "notifications_users": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::notifications-user.notifications-user",
+      "mappedBy": "notification"
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "notifications_users",
+  "info": {
+    "singularName": "notifications-user",
+    "pluralName": "notifications-users",
+    "displayName": "Notifications-user",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "notification": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::notification.notification",
+      "inversedBy": "notifications_users"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "notifications_users"
+    },
+    "isRead": {
+      "type": "boolean"
+    }
+  }
+}
