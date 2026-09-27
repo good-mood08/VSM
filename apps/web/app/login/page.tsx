@@ -7,6 +7,7 @@ export default function LoginPageScreen() {
     <main className="flex min-h-screen w-full justify-center bg-white px-5 pb-[34px] pt-[62px]">
       <section className="w-full max-w-sm">
         <LoginPage />
+        
       </section>
     </main>
   );

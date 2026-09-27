@@ -1,9 +1,7 @@
 'use client'
 
-import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 
-import {HomeLink, ScenarioLink, RatingLink, ProfileLink} from './Links'
 import NavigationLink from './Link';
 
 interface ILink{
